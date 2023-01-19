@@ -6,7 +6,7 @@
 /*   By: seheo <seheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 14:59:49 by hajeong           #+#    #+#             */
-/*   Updated: 2023/01/18 22:04:12 by seheo            ###   ########.fr       */
+/*   Updated: 2023/01/19 23:08:33 by seheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,39 +32,92 @@
 # define WIDTH			1980
 # define HEIGHT			1080
 
-typedef struct s_ray
+typedef struct s_player
 {
-	double	posX;
-	double	posY;
-	double	dirX;
-	double	dirY;
-	double	planeX;
-	double	planeY;
-	void	*mlx;
-	void	*win;
-	double	moveSpeed;
-	double	rotSpeed;
-	int		worldmap[24][24];
-}	t_ray;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	double	move_speed;
+	double	rot_speed;
+	int		texture[4][64 * 64];
+}	t_player;
+
+typedef struct	s_ray
+{
+	double		camera_x;
+	double		ray_dir_x;
+	double		ray_dir_y;
+	int			map_x;
+	int			map_y;
+	double		side_dist_x;
+	double		side_dist_y;
+	double		delta_dist_x;
+	double		delta_dist_y;
+	double		perp_wall_dist;
+	int			step_x;
+	int			step_y;
+	int			dir_side;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
+	double		wall_x;
+}				t_ray;
+
+typedef struct	s_map
+{
+	int			width;
+	int			height;
+	int			floor_text;
+	int			ceiling_text;
+	char		*texture_file[4];
+	int			f_rgb[3];
+	int			c_rgb[3];
+}				t_map;
+
+typedef struct	s_img
+{
+	void		*ptr;
+	int			*data;
+	int			size_l;
+	int			bpp;
+	int			endian;
+	int			img_width;
+	int			img_height;
+}				t_img;
 
 typedef struct s_game
 {
-	char	*line;
-	char	*texture_file[4];
-	int		f_rgb[3];
-	int		c_rgb[3];
-	int		map_height;
-	int		map_width;
-	char	**map;
-	t_ray	ray;
+	char		*line;
+	void		*mlx;
+	void		*win;
+	char		**map;;
+	char		buf[HEIGHT][WIDTH];	
+	int			re_buf;	
+	t_player	player;
+	t_map		map_info;
+	t_img		img;	
 }	t_game;
+
+typedef struct	s_text
+{
+	double		t_pos;
+	int			t_x;
+	int			t_y;
+	int			t_num;
+	int			color;
+}				t_text;
 
 enum texture
 {
 	NORTH,
 	SOUTH,
 	WEST, 
-	EAST
+	EAST,
+	FLOOR,
+	CELL
 };
 
 

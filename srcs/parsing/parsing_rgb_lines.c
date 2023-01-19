@@ -6,8 +6,8 @@ char *key, char *value)
 	char	**strs;
 	int		i;
 	
-	if (field[0] >= 0 || field[1] >= 0 || field[2] >= 0)
-		ft_error(game, "rgb property is duplicated defined");
+	//if (field[0] >= 0 || field[1] >= 0 || field[2] >= 0)
+	//	ft_error(game, "rgb property is duplicated defined");
 	i = -1;
 	while (value[++i] != '\0')
 		if (!ft_isdigit(value[i]) && value[i] != ',')
@@ -29,9 +29,9 @@ char *key, char *value)
 static void	assign_rgb(t_game *game, char *key, char *value)
 {
 	if (ft_strcmp(key, "F") == 0)
-		assign_rgb_by_key(game, game->f_rgb, key, value);
+		assign_rgb_by_key(game, game->map_info.f_rgb, key, value);
 	else if (ft_strcmp(key, "C") == 0)
-		assign_rgb_by_key(game, game->c_rgb, key, value);
+		assign_rgb_by_key(game, game->map_info.c_rgb, key, value);
 	else
 		ft_error(game, "");
 }
@@ -60,7 +60,7 @@ void	parsing_rgb_lines(t_game *game, int fd)
 		free(game->line);
 		game->line = get_next_line(fd);
 	}
-	if (game->f_rgb[0] < 0 || game->f_rgb[1] < 0 || game->f_rgb[2] < 0 || \
-		game->c_rgb[0] < 0 || game->c_rgb[1] < 0 || game->c_rgb[2] < 0)
+	if (game->map_info.f_rgb[0] < 0 || game->map_info.f_rgb[1] < 0 || game->map_info.f_rgb[2] < 0 || \
+		game->map_info.c_rgb[0] < 0 || game->map_info.c_rgb[1] < 0 || game->map_info.c_rgb[2] < 0)
 		ft_error(game, "need more imformation about rgb property");
 }

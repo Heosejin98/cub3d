@@ -14,6 +14,6 @@ static void validate(t_game *game, int *arr)
 
 void	validate_rgb_lines(t_game *game)
 {
-	validate(game, game->f_rgb);
-	validate(game, game->c_rgb);
+	validate(game, game->map_info.f_rgb);
+	validate(game, game->map_info.c_rgb);
 }

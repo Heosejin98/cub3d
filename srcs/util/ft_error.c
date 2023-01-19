@@ -2,8 +2,11 @@
 
 void	ft_error(t_game *game, char *msg)
 {
-	ft_free_game(game);
+	if(game->win)
+		mlx_destroy_window(game->mlx, game->win);
+	if (game->img.ptr)
+		mlx_destroy_image(game->mlx, game->img.ptr);
 	ft_printf("Error : %s\n", msg);
-	// system("leaks cub3d");
+	//system("leaks cub3d");
 	exit(0);
 }

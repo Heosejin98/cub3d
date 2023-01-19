@@ -11,8 +11,8 @@ static void validate(t_game *game, char *texture_file)
 
 void	validate_texture_lines(t_game *game)
 {
-	validate(game, game->texture_file[NORTH]);
-	validate(game, game->texture_file[SOUTH]);
-	validate(game, game->texture_file[WEST]);
-	validate(game, game->texture_file[EAST]);
+	validate(game, game->map_info.texture_file[NORTH]);
+	validate(game, game->map_info.texture_file[SOUTH]);
+	validate(game, game->map_info.texture_file[WEST]);
+	validate(game, game->map_info.texture_file[EAST]);
 }

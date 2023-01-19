@@ -19,7 +19,7 @@ PARSING_SRCS =	parsing_cub_file.c read_file.c parsing_texture_lines.c \
 				parsing_rgb_lines.c parsing_map_lines.c validate_texture_lines.c \
 				validate_rgb_lines.c validate_map.c check_needless_lines.c
 				
-UTIL_SRCS =		ft_split_isspace.c init_game_struct.c ft_free_strs.c ft_free_game.c \
+UTIL_SRCS =		ft_split_isspace.c ft_free_strs.c ft_free_game.c \
 				ft_error.c validate_arg.c
 
 LIBFT_DIR = libft

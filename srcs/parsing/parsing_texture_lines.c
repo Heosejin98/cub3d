@@ -17,13 +17,13 @@ char *key, char *value)
 static void	assign_texture(t_game *game, char *key, char *value)
 {
 	if (ft_strcmp(key, "NO") == 0)
-		assign_texture_by_key(game, &(game->texture_file[NORTH]), key, value);
+		assign_texture_by_key(game, &(game->map_info.texture_file[NORTH]), key, value);
 	else if (ft_strcmp(key, "SO") == 0)
-		assign_texture_by_key(game, &(game->texture_file[SOUTH]), key, value);
+		assign_texture_by_key(game, &(game->map_info.texture_file[SOUTH]), key, value);
 	else if (ft_strcmp(key, "WE") == 0)
-		assign_texture_by_key(game, &(game->texture_file[WEST]), key, value);
+		assign_texture_by_key(game, &(game->map_info.texture_file[WEST]), key, value);
 	else if (ft_strcmp(key, "EA") == 0)
-		assign_texture_by_key(game, &(game->texture_file[EAST]), key, value);
+		assign_texture_by_key(game, &(game->map_info.texture_file[EAST]), key, value);
 	else
 		ft_error(game, "strange identifier in texture lines");
 } 
@@ -55,7 +55,7 @@ void	parsing_texture_lines(t_game *game, int fd)
 	}
 	while (++i < 4)
 	{
-		if (game->texture_file[i] == NULL)
+		if (game->map_info.texture_file[i] == NULL)
 			ft_error(game, "need more imformation about texture property");
 	}
 
