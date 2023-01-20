@@ -6,7 +6,7 @@
 /*   By: seheo <seheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 14:59:49 by hajeong           #+#    #+#             */
-/*   Updated: 2023/01/20 17:17:11 by seheo            ###   ########.fr       */
+/*   Updated: 2023/01/20 21:27:53 by seheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,11 @@ typedef struct	s_ray
 	int			draw_start;
 	int			draw_end;
 	double		wall_x;
+	int			text_num;
+	int			tex_x;
+	double		step;
+	double		tex_pos;
+				
 }				t_ray;
 
 typedef struct	s_map
@@ -101,7 +106,8 @@ typedef struct s_game
 	int			re_buf;	
 	t_player	player;
 	t_map		map_info;
-	t_img		img;	
+	t_img		img;
+	t_ray		ray;
 }	t_game;
 
 typedef struct	s_text
