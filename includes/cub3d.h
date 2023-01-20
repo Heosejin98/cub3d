@@ -6,7 +6,7 @@
 /*   By: seheo <seheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 14:59:49 by hajeong           #+#    #+#             */
-/*   Updated: 2023/01/19 23:08:33 by seheo            ###   ########.fr       */
+/*   Updated: 2023/01/20 15:55:39 by seheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # define KEY_EXIT 		17
 # define X_EVENT_KEY_PRESS	2
 
+# define texWidth 64
+# define texHeight 64
+
 # define KEY_ESC		53
 # define KEY_W			13
 # define KEY_A			0
@@ -30,7 +33,7 @@
 # define KEY_D			2
 
 # define WIDTH			1980
-# define HEIGHT			1080
+# define HEIGHT			1020
 
 typedef struct s_player
 {
@@ -42,7 +45,7 @@ typedef struct s_player
 	double	plane_y;
 	double	move_speed;
 	double	rot_speed;
-	int		texture[4][64 * 64];
+	int		*texture[4];
 }	t_player;
 
 typedef struct	s_ray
@@ -94,7 +97,7 @@ typedef struct s_game
 	void		*mlx;
 	void		*win;
 	char		**map;;
-	char		buf[HEIGHT][WIDTH];	
+	int			**buf;	
 	int			re_buf;	
 	t_player	player;
 	t_map		map_info;

@@ -16,4 +16,5 @@ void parsing_cub_file(t_game *game, char *file)
 	validate_map(game);
 	//system("leaks --list cub3d");
 	close(fd);
+
 }

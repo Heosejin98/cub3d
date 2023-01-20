@@ -6,8 +6,8 @@ WE ./resource/image/colorstone.xpm
 EA ./resource/image/eagle.xpm
 
 
-F 120,122,123
-C 245,245,120
+F 255,0,0
+C 0,0,255
 
 
         1111111111111111111111111
