@@ -6,7 +6,7 @@
 /*   By: seheo <seheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 14:59:49 by hajeong           #+#    #+#             */
-/*   Updated: 2023/01/20 21:27:53 by seheo            ###   ########.fr       */
+/*   Updated: 2023/01/20 23:16:33 by seheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_player
 	int		*texture[4];
 }	t_player;
 
-typedef struct	s_ray
+typedef struct s_ray
 {
 	double		camera_x;
 	double		ray_dir_x;
@@ -70,11 +70,10 @@ typedef struct	s_ray
 	int			text_num;
 	int			tex_x;
 	double		step;
-	double		tex_pos;
-				
+	double		tex_pos;		
 }				t_ray;
 
-typedef struct	s_map
+typedef struct s_map
 {
 	int			width;
 	int			height;
@@ -85,7 +84,7 @@ typedef struct	s_map
 	int			c_rgb[3];
 }				t_map;
 
-typedef struct	s_img
+typedef struct s_img
 {
 	void		*ptr;
 	int			*data;
@@ -101,7 +100,7 @@ typedef struct s_game
 	char		*line;
 	void		*mlx;
 	void		*win;
-	char		**map;;
+	char		**map;
 	int			**buf;	
 	int			re_buf;	
 	t_player	player;
@@ -110,7 +109,7 @@ typedef struct s_game
 	t_ray		ray;
 }	t_game;
 
-typedef struct	s_text
+typedef struct s_text
 {
 	double		t_pos;
 	int			t_x;
@@ -119,15 +118,13 @@ typedef struct	s_text
 	int			color;
 }				t_text;
 
-enum texture
+enum e_texture
 {
 	NORTH,
 	SOUTH,
-	WEST, 
+	WEST,
 	EAST,
 };
-
-
 
 // parsing
 void	parsing_cub_file(t_game *game, char *file);
@@ -148,5 +145,16 @@ void	ft_free_strs(char **strs);
 void	ft_free_game(t_game *game);
 void	ft_error(t_game *game, char *msg);
 void	validate_arg(t_game *game, int argc, char *argv[]);
+int		arr_to_hex(int *arr);
 
+//raycasting
+void	raycasting(t_game *game);
+int		key_press(int key, t_game *game);
+void	set_draw(t_game *game, int x);
+void	game_setting(t_game *game);
+void	load_image(t_game *game, int tex_num, char *path);
+void	get_texture_img(t_game *game);
+void	find_player(t_game *game);
+
+int		cub_loop(t_game *game);
 #endif

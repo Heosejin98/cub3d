@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_rgb_lines.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seheo <seheo@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/20 23:22:56 by seheo             #+#    #+#             */
+/*   Updated: 2023/01/20 23:25:14 by seheo            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 static void	assign_rgb_by_key(t_game *game, int *field, \
@@ -5,9 +17,7 @@ char *key, char *value)
 {
 	char	**strs;
 	int		i;
-	
-	//if (field[0] >= 0 || field[1] >= 0 || field[2] >= 0)
-	//	ft_error(game, "rgb property is duplicated defined");
+
 	i = -1;
 	while (value[++i] != '\0')
 		if (!ft_isdigit(value[i]) && value[i] != ',')
@@ -15,7 +25,7 @@ char *key, char *value)
 	strs = ft_split(value, ',');
 	if (strs == NULL)
 		ft_error(game, "malloc error");
-	if (strs[3] != NULL || !strs[0] || !strs[1] || !strs[2]) 
+	if (strs[3] != NULL || !strs[0] || !strs[1] || !strs[2])
 	{
 		ft_free_strs(strs);
 		ft_error(game, "rgb property must have 3 numbers");
@@ -34,6 +44,14 @@ static void	assign_rgb(t_game *game, char *key, char *value)
 		assign_rgb_by_key(game, game->map_info.c_rgb, key, value);
 	else
 		ft_error(game, "");
+}
+
+static void	check_f_c_rgb(t_game *game)
+{
+	if (game->map_info.f_rgb[0] < 0 || game->map_info.f_rgb[1] < 0 \
+		|| game->map_info.f_rgb[2] < 0 || game->map_info.c_rgb[0] < 0 \
+		|| game->map_info.c_rgb[1] < 0 || game->map_info.c_rgb[2] < 0)
+		ft_error(game, "need more imformation about rgb property");
 }
 
 void	parsing_rgb_lines(t_game *game, int fd)
@@ -60,7 +78,5 @@ void	parsing_rgb_lines(t_game *game, int fd)
 		free(game->line);
 		game->line = get_next_line(fd);
 	}
-	if (game->map_info.f_rgb[0] < 0 || game->map_info.f_rgb[1] < 0 || game->map_info.f_rgb[2] < 0 || \
-		game->map_info.c_rgb[0] < 0 || game->map_info.c_rgb[1] < 0 || game->map_info.c_rgb[2] < 0)
-		ft_error(game, "need more imformation about rgb property");
+	check_f_c_rgb(game);
 }

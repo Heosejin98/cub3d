@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_map.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seheo <seheo@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/20 23:28:32 by seheo             #+#    #+#             */
+/*   Updated: 2023/01/20 23:28:54 by seheo            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 static void	validate_map_char(t_game *game)
@@ -13,7 +25,7 @@ static void	validate_map_char(t_game *game)
 		j = -1;
 		while (game->map[i][++j] != '\0')
 		{
-			if (!ft_strchr(" 012345NSEW", game->map[i][j])) //바꿔야됌
+			if (!ft_strchr(" 01NSEW", game->map[i][j]))
 				ft_error(game, "strange characters in the map");
 			else if (ft_strchr("NSEW", game->map[i][j]))
 				cnt++;
@@ -72,11 +84,9 @@ static void	validate_map_wall(t_game *game)
 	i = -1;
 	while (++i < game->map_info.height)
 		validate_row(game, i);
-		
 	i = -1;
 	while (++i < game->map_info.width)
 		validate_column(game, i);
-	
 }
 
 void	validate_map(t_game *game)
