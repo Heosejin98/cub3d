@@ -29,7 +29,7 @@
 # define K_Z 6
 # define K_ESC 53
 
-int	main_loop(t_game *game);
+int	raycasting(t_game *game);
 
 void	set_dir(t_game *game, double d_x, double d_y)
 {
@@ -176,7 +176,7 @@ int	key_press(int key, t_game *game)
 	if (key == K_ESC)
 		exit(0);
 	mlx_clear_window(game->mlx, game->win);
-	main_loop(game);
+	raycasting(game);
 	return (0);
 }
 
@@ -202,66 +202,6 @@ static int	arr_to_hex(int *arr)
 
 void	calc(t_game *game)
 {
-	//FLOOR CASTING
-	for(int y = 0; y < HEIGHT; y++)
-	{
-		// rayDir for leftmost ray (x = 0) and rightmost ray (x = w)
-		float rayDirX0 = game->player.dir_x - game->player.plane_x;
-		float rayDirY0 = game->player.dir_y - game->player.plane_y;
-		float rayDirX1 = game->player.dir_x + game->player.plane_x;
-		float rayDirY1 = game->player.dir_y + game->player.plane_y;
-
-		// Current y position compared to the center of the screen (the horizon)
-		int p = y - HEIGHT / 2;
-
-		// Vertical position of the camera.
-		float posZ = 0.5 * HEIGHT;
-
-		// Horizontal distance from the camera to the floor for the current row.
-		// 0.5 is the z position exactly in the middle between floor and ceiling.
-		float rowDistance = posZ / p;
-
-		// calculate the real world step vector we have to add for each x (parallel to camera plane)
-		// adding step by step avoids multiplications with a weight in the inner loop
-		float floorStepX = rowDistance * (rayDirX1 - rayDirX0) / WIDTH;
-		float floorStepY = rowDistance * (rayDirY1 - rayDirY0) / WIDTH;
-
-		// real world coordinates of the leftmost column. This will be updated as we step to the right.
-		float floorX = game->player.pos_x + rowDistance * rayDirX0;
-		float floorY = game->player.pos_y + rowDistance * rayDirY0;
-
-		for(int x = 0; x < WIDTH; ++x)
-		{
-			// the cell coord is simply got from the integer parts of floorX and floorY
-			int cellX = (int)(floorX);
-			int cellY = (int)(floorY);
-
-			// get the texture coordinate from the fractional part
-			int tx = (int)(texWidth * (floorX - cellX)) & (texWidth - 1);
-			int ty = (int)(texHeight * (floorY - cellY)) & (texHeight - 1);
-
-			floorX += floorStepX;
-			floorY += floorStepY;
-
-			// choose texture and draw the pixel
-			int floorTexture = 4;
-			int ceilingTexture = 5;
-
-			int color;
-
-			// floor
-			color = game->player.texture[floorTexture][texWidth * ty + tx];
-			color = (color >> 1) & 8355711; // make a bit darker
-
-			game->buf[y][x] = color;
-
-			//ceiling (symmetrical, at screenHeight - y - 1 instead of y)
-			color = game->player.texture[ceilingTexture][texWidth * ty + tx];
-			color = (color >> 1) & 8355711; // make a bit darker
-
-			game->buf[HEIGHT - y - 1][x] = color;
-		}
-	}
 	//WALL CASTING
 	for(int x = 0; x < WIDTH; x++)
 	{
@@ -366,25 +306,25 @@ void	calc(t_game *game)
 			textint = EAST;
 
 		// x coordinate on the texture
-		int texX = (int)(wallX * (double)texWidth);
+		int texX = (int)(wallX * (double)TEXWIDTH);
 		if (side == 0 && rayDirX > 0)
-			texX = texWidth - texX - 1;
+			texX = TEXWIDTH - texX - 1;
 		if (side == 1 && rayDirY < 0)
-			texX = texWidth - texX - 1;
+			texX = TEXWIDTH - texX - 1;
 
 		// How much to increase the texture coordinate perscreen pixel
-		double step = 1.0 * texHeight / lineHeight;
+		double step = 1.0 * TEXHIGHT / lineHeight;
 
 		// Starting texture coordinate
 		double texPos = (drawStart - HEIGHT / 2 + lineHeight / 2) * step;
 
 		for (int y = drawStart; y < drawEnd; y++)
 		{
-			// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
-			int texY = (int)texPos & (texHeight - 1);
+			// Cast the texture coordinate to integer, and mask with (TEXHIGHT - 1) in case of overflow
+			int texY = (int)texPos & (TEXHIGHT - 1);
 			texPos += step;
 
-			int color = game->player.texture[textint][texHeight * texY + texX];
+			int color = game->player.texture[textint][TEXHIGHT * texY + texX];
 
 			// make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
 			if (side == 1)
@@ -436,7 +376,7 @@ void	calc(t_game *game)
 	}
 }
 
-int	main_loop(t_game *game)
+int	raycasting(t_game *game)
 {
 	calc(game);
 	draw(game);
@@ -478,6 +418,9 @@ void	get_texture_img(t_game *game)
 	{
 		load_image(game, i, game->map_info.texture_file[i]);
 	}
+	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "cub3d");
+	game->img.ptr = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	game->img.data = (int *)mlx_get_data_addr(game->img.ptr, &game->img.bpp, &game->img.size_l, &game->img.endian);
 }
 
 #include <stdio.h>
@@ -495,6 +438,17 @@ int		game_setting(t_game *game)
 	while (++i < HEIGHT)
 	{
 		game->buf[i] = ft_calloc(WIDTH, sizeof(int));
+	}
+	i = -1;
+	while (++i < 4)
+	{
+		if (!(game->player.texture[i] = (int *)malloc(sizeof(int) * (TEXHIGHT * TEXWIDTH))))
+			ft_error(game, "malloc error");
+	}
+	i = -1;
+	while (++i < 4)
+	{	
+		ft_memset(game->player.texture[i], 0, (TEXHIGHT * TEXWIDTH));
 	}
 	return (1);
 }
@@ -533,28 +487,8 @@ int main(int argc, char *argv[])
 	parsing_cub_file(&game, argv[1]);	
 	game_setting(&game);
 	find_player(&game);
-
-
-	
-	for (int i = 0; i < 6; i++)
-	{
-		if (!(game.player.texture[i] = (int *)malloc(sizeof(int) * (texHeight * texWidth))))
-			return (-1);
-	}
-	for (int i = 0; i < 6; i++)
-	{
-		for (int j = 0; j < texHeight * texWidth; j++)
-		{
-			game.player.texture[i][j] = 0;
-		}
-	}
 	get_texture_img(&game);
-
-	game.win = mlx_new_window(game.mlx, WIDTH, HEIGHT, "cub3d");
-	game.img.ptr = mlx_new_image(game.mlx, WIDTH, HEIGHT);
-	game.img.data = (int *)mlx_get_data_addr(game.img.ptr, &game.img.bpp, &game.img.size_l, &game.img.endian);
-
-	mlx_loop_hook(game.mlx, &main_loop, &game);
+	mlx_loop_hook(game.mlx, &raycasting, &game);
 	mlx_hook(game.win, X_EVENT_KEY_PRESS, 0, &key_press, &game);
 	mlx_loop(game.mlx);
 	ft_free_game(&game);

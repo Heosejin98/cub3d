@@ -6,7 +6,7 @@
 /*   By: seheo <seheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 14:59:49 by hajeong           #+#    #+#             */
-/*   Updated: 2023/01/20 15:55:39 by seheo            ###   ########.fr       */
+/*   Updated: 2023/01/20 17:17:11 by seheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # define KEY_EXIT 		17
 # define X_EVENT_KEY_PRESS	2
 
-# define texWidth 64
-# define texHeight 64
+# define TEXWIDTH 64
+# define TEXHIGHT 64
 
 # define KEY_ESC		53
 # define KEY_W			13
@@ -119,8 +119,6 @@ enum texture
 	SOUTH,
 	WEST, 
 	EAST,
-	FLOOR,
-	CELL
 };
 
 
