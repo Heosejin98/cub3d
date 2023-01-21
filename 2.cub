@@ -1,16 +1,17 @@
 
 
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO ./resource/image/barrel.xpm
+SO ./resource/image/bluestone.xpm
+WE ./resource/image/colorstone.xpm
+EA ./resource/image/eagle.xpm
 
 
 F 255,100,0
 C 225,30,1
 
- 111111        111
-1S000001       101    
- 111101        111
-1    1
-1
+11111        111
+1N001        111
+10001        101
+10001        111
+11111        111
+

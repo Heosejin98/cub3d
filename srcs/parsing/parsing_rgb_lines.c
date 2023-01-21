@@ -6,7 +6,7 @@
 /*   By: seheo <seheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 23:22:56 by seheo             #+#    #+#             */
-/*   Updated: 2023/01/20 23:25:14 by seheo            ###   ########.fr       */
+/*   Updated: 2023/01/21 19:47:27 by seheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char *key, char *value)
 	}
 	i = -1;
 	while (++i < 3)
-		field[i] = atoi(strs[i]);
+		field[i] = ft_atoi(strs[i]);
 	ft_free_strs(strs);
 }
 

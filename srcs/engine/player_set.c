@@ -6,7 +6,7 @@
 /*   By: seheo <seheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 23:21:21 by seheo             #+#    #+#             */
-/*   Updated: 2023/01/20 23:21:22 by seheo            ###   ########.fr       */
+/*   Updated: 2023/01/21 20:12:05 by seheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ static void	set_pos(t_game *game, char pos, int i, int j)
 		set_dir(game, 0, -1);
 		set_plane(game, 0.66, 0);
 	}
-	game->player.pos_x = i;
-	game->player.pos_y = j;
+	game->player.pos_x = i + 0.5;
+	game->player.pos_y = j + 0.5;
 }
 
 void	find_player(t_game *game)

@@ -6,7 +6,7 @@
 /*   By: seheo <seheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 14:59:49 by hajeong           #+#    #+#             */
-/*   Updated: 2023/01/20 23:16:33 by seheo            ###   ########.fr       */
+/*   Updated: 2023/01/21 20:49:30 by seheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@
 # define KEY_A			0
 # define KEY_S			1
 # define KEY_D			2
+# define KEY_LEFT		123
+# define KEY_RIGHT		124
+
+# define S			0.2
 
 # define WIDTH			1980
 # define HEIGHT			1020
@@ -149,7 +153,7 @@ int		arr_to_hex(int *arr);
 
 //raycasting
 void	raycasting(t_game *game);
-int		key_press(int key, t_game *game);
+int		press_key(int keycode, t_game *game);
 void	set_draw(t_game *game, int x);
 void	game_setting(t_game *game);
 void	load_image(t_game *game, int tex_num, char *path);
