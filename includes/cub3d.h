@@ -6,7 +6,7 @@
 /*   By: seheo <seheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 14:59:49 by hajeong           #+#    #+#             */
-/*   Updated: 2023/01/21 20:49:30 by seheo            ###   ########.fr       */
+/*   Updated: 2023/01/29 12:10:20 by seheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,4 +161,6 @@ void	get_texture_img(t_game *game);
 void	find_player(t_game *game);
 
 int		cub_loop(t_game *game);
+int		click_destroy(t_game *game);
+
 #endif

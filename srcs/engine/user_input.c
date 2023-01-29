@@ -2,14 +2,16 @@
 
 void	press_ws(t_game *game, int flag)
 {	
-	if (game->map[(int)(game->player.pos_x + game->player.dir_x * S)] \
-	[(int)(game->player.pos_y)] != '1')
-		game->player.pos_x += \
-		game->player.dir_x * game->player.move_speed * (double)flag;
-	if (game->map[(int)(game->player.pos_x)] \
-	[(int)(game->player.pos_y + game->player.dir_y * S)] != '1')
-		game->player.pos_y += \
-		game->player.dir_y * game->player.move_speed * (double)flag;
+	double	move_x;
+	double	move_y;
+
+	move_x = game->player.pos_x + game->player.dir_x * (double)S * flag;
+	move_y = game->player.pos_y + game->player.dir_y * (double)S * flag;
+	if (game->map[(int)move_x][(int)(game->player.pos_y)] == '1' ||
+		game->map[(int)(game->player.pos_x)][(int)move_y] == '1')
+		return ;
+	game->player.pos_x = move_x;
+	game->player.pos_y = move_y;
 }
 
 void	press_ad(t_game *game, int flag)
@@ -17,12 +19,15 @@ void	press_ad(t_game *game, int flag)
 	double	move_x;
 	double	move_y;
 
-	move_x = game->player.pos_x + game->player.plane_x * (double)S * flag;
-	move_y = game->player.pos_y + game->player.plane_y * (double)S * flag;
-	if (game->map[(int)move_y][(int)move_x] == '1')
+	move_x = \
+	game->player.pos_x + game->player.plane_x * (double)S * (double)flag;
+	move_y = \
+	game->player.pos_y + game->player.plane_y * (double)S * (double)flag;
+	if (game->map[(int)move_x][(int)(game->player.pos_y)] == '1' ||
+		game->map[(int)(game->player.pos_x)][(int)move_y] == '1')
 		return ;
 	game->player.pos_x = move_x;
-	game->player.pos_x = move_y;
+	game->player.pos_y = move_y;
 }
 
 void	press_lr(t_game *game, int flag)
@@ -50,7 +55,6 @@ int	click_destroy(t_game *game)
 {
 	mlx_destroy_window(game->mlx, game->win);
 	ft_free_game(game);
-	system("leaks cub3d");
 	exit(EXIT_SUCCESS);
 }
 

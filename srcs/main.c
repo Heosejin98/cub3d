@@ -6,7 +6,7 @@
 /*   By: seheo <seheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 23:31:32 by seheo             #+#    #+#             */
-/*   Updated: 2023/01/21 21:05:35 by seheo            ###   ########.fr       */
+/*   Updated: 2023/01/29 12:10:35 by seheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	main(int argc, char *argv[])
 	find_player(&game);
 	get_texture_img(&game);
 	mlx_hook(game.win, X_EVENT_KEY_PRESS, 0, press_key, &game);
+	mlx_hook(game.win, KEY_EXIT, 0, click_destroy, &game);
 	mlx_loop_hook(game.mlx, &cub_loop, &game);
 	mlx_loop(game.mlx);
 	ft_free_game(&game);
