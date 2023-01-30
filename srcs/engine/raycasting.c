@@ -6,7 +6,7 @@
 /*   By: seheo <seheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 23:17:28 by seheo             #+#    #+#             */
-/*   Updated: 2023/01/29 18:54:17 by seheo            ###   ########.fr       */
+/*   Updated: 2023/01/30 16:32:42 by seheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,12 @@ void	cal_pre_wall_dist(t_game *game)
 	ydist = game->ray.map_y - game->player.pos_y;
 	if (game->ray.dir_side == 0)
 		game->ray.perp_wall_dist = \
-		(xdist + (1 - game->ray.step_x) / 2) / game->ray.ray_dir_x;
+			(xdist + (1 - game->ray.step_x) / 2) / game->ray.ray_dir_x;
 	else
 		game->ray.perp_wall_dist = \
-		(ydist + (1 - game->ray.step_y) / 2) / game->ray.ray_dir_y;
+			(ydist + (1 - game->ray.step_y) / 2) / game->ray.ray_dir_y;
 
-	game->ray.line_height = (int)(HEIGHT / game->ray.perp_wall_dist);
+	game->ray.line_height = (int)((HEIGHT) / game->ray.perp_wall_dist);
 }
 
 void	raycasting(t_game *game)
@@ -105,7 +105,6 @@ void	raycasting(t_game *game)
 		cal_ray_val(game, x);
 		dda(game);
 		cal_pre_wall_dist(game);
-		game->ray.draw_start = -game->ray.line_height / 2 + HEIGHT / 2;
 		set_draw(game, x);
 	}
 }

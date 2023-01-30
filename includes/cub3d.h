@@ -6,7 +6,7 @@
 /*   By: seheo <seheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 14:59:49 by hajeong           #+#    #+#             */
-/*   Updated: 2023/01/30 12:17:47 by seheo            ###   ########.fr       */
+/*   Updated: 2023/01/30 16:28:54 by seheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ typedef struct s_game
 	void		*win;
 	char		**map;
 	int			**buf;	
-	int			re_buf;	
 	t_player	player;
 	t_map		map_info;
 	t_img		img;

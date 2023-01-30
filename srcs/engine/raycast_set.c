@@ -6,7 +6,7 @@
 /*   By: seheo <seheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 23:21:28 by seheo             #+#    #+#             */
-/*   Updated: 2023/01/30 11:53:50 by seheo            ###   ########.fr       */
+/*   Updated: 2023/01/30 16:35:31 by seheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	set_draw_index(t_game *game)
 {
+	game->ray.draw_start = HEIGHT / 2 - game->ray.line_height / 2;
 	if (game->ray.draw_start < 0)
 		game->ray.draw_start = 0;
 	game->ray.draw_end = game->ray.line_height / 2 + HEIGHT / 2;
@@ -64,11 +65,8 @@ static void	set_map(t_game *game, int x)
 	{
 		tex_y = (int)tex_pos & (TEXHIGHT - 1);
 		tex_pos += game->ray.step;
-		color = \
-		game->player.texture \
+		color = game->player.texture \
 		[game->ray.text_num][TEXHIGHT * tex_y + game->ray.tex_x];
-		if (game->ray.dir_side == 1)
-			color = (color >> 1) & 8355711;
 		game->buf[y][x] = color;
 	}
 	y = game->ray.draw_end + 1;
