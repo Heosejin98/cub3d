@@ -6,7 +6,7 @@
 /*   By: seheo <seheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 14:59:49 by hajeong           #+#    #+#             */
-/*   Updated: 2023/01/29 14:56:39 by seheo            ###   ########.fr       */
+/*   Updated: 2023/01/30 12:17:47 by seheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # define KEY_EXIT 		17
 # define X_EVENT_KEY_PRESS	2
 
-# define TEXWIDTH 64
-# define TEXHIGHT 64
+# define TEXWIDTH 32
+# define TEXHIGHT 32
 
 # define KEY_ESC		53
 # define KEY_W			13
@@ -36,8 +36,8 @@
 
 # define S			0.2
 
-# define WIDTH			1980
-# define HEIGHT			1020
+# define WIDTH			1920
+# define HEIGHT			1080
 
 typedef struct s_player
 {

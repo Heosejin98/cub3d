@@ -6,7 +6,7 @@
 /*   By: seheo <seheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 23:21:28 by seheo             #+#    #+#             */
-/*   Updated: 2023/01/29 17:33:28 by seheo            ###   ########.fr       */
+/*   Updated: 2023/01/30 11:53:50 by seheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ static void	set_wallx_direction(t_game *game)
 static void	set_texture_info(t_game *game)
 {
 	game->ray.tex_x = (int)(game->ray.wall_x * (double)TEXWIDTH);
-	if (game->ray.dir_side == 0 && game->ray.ray_dir_x > 0)
+	if (game->ray.dir_side == 0 && game->ray.ray_dir_x < 0)
 		game->ray.tex_x = TEXWIDTH - game->ray.tex_x - 1;
-	if (game->ray.dir_side == 1 && game->ray.ray_dir_y < 0)
+	if (game->ray.dir_side == 1 && game->ray.ray_dir_y > 0)
 		game->ray.tex_x = TEXWIDTH - game->ray.tex_x - 1;
 	game->ray.step = 1.0 * TEXHIGHT / game->ray.line_height;
 }
