@@ -6,7 +6,7 @@
 /*   By: seheo <seheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 23:17:28 by seheo             #+#    #+#             */
-/*   Updated: 2023/01/30 16:32:42 by seheo            ###   ########.fr       */
+/*   Updated: 2023/02/10 15:04:58 by seheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void	cal_pre_wall_dist(t_game *game)
 	else
 		game->ray.perp_wall_dist = \
 			(ydist + (1 - game->ray.step_y) / 2) / game->ray.ray_dir_y;
-
 	game->ray.line_height = (int)((HEIGHT) / game->ray.perp_wall_dist);
 }
 
